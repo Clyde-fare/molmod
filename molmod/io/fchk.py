@@ -30,6 +30,9 @@ import numpy as np
 
 __all__ = ["FCHKFile"]
 
+#Gaussian constant determining no. angstrom per bohr
+#see http://www.gaussian.com/g_tech/g_ur/k_constants.htm
+ang_per_bohr = 0.5291772086
 
 class FCHKFile(object):
     """Reader for Formatted checkpoint files
@@ -158,7 +161,7 @@ class FCHKFile(object):
         if ("Atomic numbers" in self.fields) and ("Current cartesian coordinates" in self.fields):
             self.molecule = Molecule(
                 self.fields["Atomic numbers"],
-                np.reshape(self.fields["Current cartesian coordinates"], (-1, 3)),
+                np.reshape(self.fields["Current cartesian coordinates"]*ang_per_bohr, (-1, 3)),
                 self.title,
             )
 
