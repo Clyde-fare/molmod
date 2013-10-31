@@ -44,7 +44,7 @@ class DLPolyHistoryReader(SlicedReader):
     """
     def __init__(self, f, sub=slice(None), pos_unit=angstrom,
         vel_unit=angstrom/picosecond, frc_unit=amu*angstrom/picosecond**2,
-        time_unit=picosecond, mass_unit=amu
+        time_unit=picosecond, mass_unit=amu, restart=False,
     ):
         """
            Arguments:
@@ -57,6 +57,13 @@ class DLPolyHistoryReader(SlicedReader):
                 from the units in the data file to atomic units. The defaults of
                 these optional arguments correspond to the defaults of dlpoly.
 
+           When the file starts with a line that satisfies the following
+           conditions, it is assumed that this is a history restart file:
+
+           * line consists of 6 words
+           * first word equals 'timestep'
+           * the following for words are integers
+           * the last word is a float
         """
         SlicedReader.__init__(self, f, sub)
         self._counter = 1 # make our counter compatible with dlpoly
@@ -65,17 +72,39 @@ class DLPolyHistoryReader(SlicedReader):
         self.frc_unit = frc_unit
         self.time_unit = time_unit
         self.mass_unit = mass_unit
-        try:
-            self.header = self._f.next()[:-1]
-            integers = tuple(int(word) for word in self._f.next().split())
-            if len(integers) != 3:
+        restart = self._detect_restart()
+        if restart is None:
+            try:
+                self.header = self._f.next()[:-1]
+                integers = tuple(int(word) for word in self._f.next().split())
+                if len(integers) != 3:
+                    raise FileFormatError("Second line must contain three integers.")
+                self.keytrj, self.imcon, self.num_atoms = integers
+            except StopIteration:
+                raise FileFormatError("File is too short. Could not read header.")
+            except ValueError:
                 raise FileFormatError("Second line must contain three integers.")
-            self.keytrj, self.imcon, self.num_atoms = integers
-        except StopIteration:
-            raise FileFormatError("File is too short. Could not read header.")
-        except ValueError:
-            raise FileFormatError("Second line must contain three integers.")
+        else:
+            self.header = ''
+            self.num_atoms, self.keytrj, self.imcon = restart
         self._frame_size = 4 + self.num_atoms*(self.keytrj+2)
+
+    def _detect_restart(self):
+        words = self._f.next().split()
+        self._f.seek(0)
+        if len(words) != 6:
+            return
+        if words[0] != 'timestep':
+            return
+        for i in 1, 2, 3, 4:
+            if not words[i].isdigit():
+                return
+        try:
+            float(words[5])
+        except ValueError:
+            return
+        return int(words[2]), int(words[3]), int(words[4])
+
 
     def _read_frame(self):
         """Read a single frame from the trajectory"""
