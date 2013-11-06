@@ -1,4 +1,4 @@
-This is the chemical notebook version of MolMod for the official version of molmod please see https://github.com/molmod/molmod
+This is the chemical notebook adapted version of MolMod for the official version of molmod please see https://github.com/molmod/molmod
 
 Molmod is a python package that is used by Zeobuilder and Tracks. Zeobuilder is
 a GUI toolkit for the interactive construction of complex molecular models. 
