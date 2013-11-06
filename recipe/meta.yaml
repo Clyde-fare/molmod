@@ -1,0 +1,33 @@
+package:
+  name: chemnotebook_molmod
+  version: 1.0
+
+source:
+  git_url: https://github.com/Clyde-fare/molmod.git
+
+build:
+  number: 0
+  
+requirements:
+  build:
+    - python
+    - numpy
+    - nose
+    - sphinx
+
+  run:
+    - python
+    - numpy
+    - sphinx
+
+test:
+  requires:
+    - nose
+    - sphinx
+  imports:
+    - molmod
+
+about:
+  home: http://molmod.github.io/molmod/
+  license: GNU General Public License version 3 (GPL)
+
