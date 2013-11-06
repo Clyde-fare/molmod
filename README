@@ -1,4 +1,7 @@
-This is the chemical notebook adapted version of MolMod for the official version of molmod please see https://github.com/molmod/molmod
+This is the chemical notebook adapted version of MolMod. For the official version of molmod please see https://github.com/molmod/molmod.
+
+This version will not install to a local install directory but can install into anaconda using the recipe included. It appears to be currently incompatible with anaconda accelerate's mkl libraries.
+
 
 Molmod is a python package that is used by Zeobuilder and Tracks. Zeobuilder is
 a GUI toolkit for the interactive construction of complex molecular models. 
