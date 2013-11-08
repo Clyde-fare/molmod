@@ -1,4 +1,6 @@
-This is the chemical notebook adapted version of MolMod. For the official version of molmod please see https://github.com/molmod/molmod.
+This is an unofficial fork of molmod for use with the chemical notebookd. For the official version of please see https://github.com/molmod/molmod.
+
+If you wish to develop for molmod please follow the above link.
 
 This version will not install to a local install directory and is  currently incompatible with anaconda accelerate's mkl libraries.
 
