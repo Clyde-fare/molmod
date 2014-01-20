@@ -1,8 +1,4 @@
 #!/bin/bash
-
-mkdir molmod
-cp -r "$RECIPE_DIR"/../../ molmod
-cd molmod
 $PYTHON setup.py install
 
 # Add more build steps here, if they are necessary.
