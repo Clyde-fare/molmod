@@ -1,8 +1,10 @@
-This is an unofficial fork of molmod for use with the chemical notebook. For the official version of please see https://github.com/molmod/molmod.
+This is an unofficial fork of molmod made to be conda-installable.
+
+ For the official version of please see https://github.com/molmod/molmod.
 
 If you wish to develop for molmod please follow the above link.
 
-This version will not install to a local install directory and is  currently incompatible with anaconda accelerate's mkl libraries.
+This version will not install to a local install directory, is  currently incompatible with anaconda accelerate's mkl libraries.
 
 MolMod is distributed as open source software under the conditions of the GPL
 license version 3. Read the file COPYING for more details, or visit
