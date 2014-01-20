@@ -1,6 +1,6 @@
 package:
-  name: chemnotebook_molmod
-  version: 1.0
+  name: molmod
+  version: 1.01
 
 source:
   git_url: https://github.com/Clyde-fare/molmod.git
