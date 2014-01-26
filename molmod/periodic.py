@@ -92,7 +92,7 @@ class PeriodicData(object):
                 else:
                     raise TypeError("Can not interpret unit %s." % word)
 
-        f = file(filename)
+        f = open(filename)
         lines_read = 0
         for line in f:
             words = line.split()
