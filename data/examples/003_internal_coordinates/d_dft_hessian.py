@@ -94,7 +94,7 @@ def setup_ics(graph):
     for i0, i1 in graph.edges:
         ics.append(BondLength(i0, i1))
     # B) Collect all bends. (see b_bending_angles.py for the explanation)
-    for i1 in xrange(graph.num_vertices):
+    for i1 in range(graph.num_vertices):
         n = list(graph.neighbors[i1])
         for index, i0 in enumerate(n):
             for i2 in n[:index]:
@@ -155,7 +155,7 @@ if __name__ == "__main__":
     # Transform to internal coordinates.
     K = numpy.dot(Jinv, numpy.dot(H, Jinv.transpose()))
     # Make a nice printout of K.
-    print "The Hessian in internal coordinates in kcal/mol/angstrom**2"
+    print("The Hessian in internal coordinates in kcal/mol/angstrom**2")
     unit = kcalmol/angstrom**2
     for row in K:
-        print " ".join("% 5.0f" % (v/unit) for v in row)
+        print(" ".join("% 5.0f" % (v/unit) for v in row))

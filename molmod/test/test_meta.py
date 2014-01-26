@@ -36,7 +36,7 @@ class MetaTestCase(unittest.TestCase):
         self.assert_(os.path.isdir(root))
         cwd = os.getcwd()
         command = "cd %s/%s; PYTHONPATH=%s:${PYTHONPATH} ./%s 1> /dev/null 2> /dev/null" % (root, dirname, cwd, fn_py)
-        print command
+        print(command)
         retcode = os.system(command)
         self.assertEqual(retcode, 0)
 

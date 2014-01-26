@@ -92,8 +92,8 @@ class Ame2003(object):
             n_masses[Z+N] = mass
 
         f = file(filename)
-        for i in xrange(39):
-            f.next()
+        for i in range(39):
+            next(f)
 
         for line in f:
             N = int(line[ 5:10])

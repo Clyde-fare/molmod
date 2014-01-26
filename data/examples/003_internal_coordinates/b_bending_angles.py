@@ -32,7 +32,7 @@ mol.set_default_graph()
 # 1) Build a list of atom indexes involved in angles.
 angles = []
 # First loop over all atoms on the molecule.
-for i1 in xrange(mol.size):
+for i1 in range(mol.size):
     # For each atom we will find all bending angles centered at the current
     # atom. For this we construct (an ordered!) list of all bonded neighbors.
     n = list(mol.graph.neighbors[i1])
@@ -45,11 +45,11 @@ for i1 in xrange(mol.size):
             angles.append((i0, i1, i2))
 
 # 2) Iterate over all angles, compute and print.
-print "An overview of all bending angles in dopamine:"
+print("An overview of all bending angles in dopamine:")
 for i0, i1, i2 in angles:
     # Notice again the [0] at the end.
     angle = bend_angle(mol.coordinates[[i0, i1, i2]])[0]
     # Python formatting of the indexes, symbols, and the angle in degrees.
-    print "%2i %2i %2i    %2s %2s %2s    %5.1f" % (
+    print("%2i %2i %2i    %2s %2s %2s    %5.1f" % (
         i0, i1, i2, mol.symbols[i0], mol.symbols[i1], mol.symbols[i2], angle/deg
-    )
+    ))

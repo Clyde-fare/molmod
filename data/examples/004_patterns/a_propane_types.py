@@ -45,10 +45,10 @@ atom_types = {
 
 # 2) loop to detect all atom types
 detected = {}
-for i in xrange(mol.size):
+for i in range(mol.size):
     # match label is going to be the label of the matching atom type.
     match_label = None
-    for label, atom_type in atom_types.iteritems():
+    for label, atom_type in atom_types.items():
         if atom_type(i, mol.graph):
             # We have a match.
             if match_label is None:
@@ -69,5 +69,5 @@ for i in xrange(mol.size):
     l.append(i)
 
 # 3) print out the detected atom types
-for label, indexes in detected.iteritems():
-    print label, indexes
+for label, indexes in detected.items():
+    print(label, indexes)

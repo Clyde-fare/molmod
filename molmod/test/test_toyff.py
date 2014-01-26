@@ -68,8 +68,8 @@ class ToyFFTestCase(unittest.TestCase):
         N = 6
 
         mask = numpy.zeros((N,N), bool)
-        for i in xrange(N):
-            for j in xrange(i):
+        for i in range(N):
+            for j in range(i):
                 mask[i,j] = True
 
         from molmod.ext import molecules_distance_matrix
@@ -118,7 +118,7 @@ class ToyFFTestCase(unittest.TestCase):
         self.assert_(error < oom*1e-5)
 
     def test_dm_quad_energy(self):
-        for i in xrange(10):
+        for i in range(10):
             ff, coordinates, dm, mask, unit_cell = self.get_random_ff()
             ff.dm_quad = 1.0
             energy = ff(coordinates, False)
@@ -128,13 +128,13 @@ class ToyFFTestCase(unittest.TestCase):
             self.assertAlmostEqual(energy, my_terms.sum())
 
     def test_dm_quad_gradient(self):
-        for i in xrange(10):
+        for i in range(10):
             ff, coordinates, dm, mask, unit_cell = self.get_random_ff()
             ff.dm_quad = 1.0
             self.check_toyff_gradient(ff, coordinates)
 
     def test_dm_reci_energy(self):
-        for i in xrange(10):
+        for i in range(10):
             ff, coordinates, dm, mask, unit_cell = self.get_random_ff()
             ff.dm_reci = 1.0
             energy = ff(coordinates, False)
@@ -148,13 +148,13 @@ class ToyFFTestCase(unittest.TestCase):
             self.assertAlmostEqual(energy, my_terms.sum())
 
     def test_dm_reci_gradient(self):
-        for i in xrange(10):
+        for i in range(10):
             ff, coordinates, dm, mask, unit_cell = self.get_random_ff()
             ff.dm_reci = 1.0
             self.check_toyff_gradient(ff, coordinates)
 
     def test_bond_quad_energy(self):
-        for i in xrange(10):
+        for i in range(10):
             ff, coordinates, dm, mask, unit_cell = self.get_random_ff()
             ff.bond_quad = 1.0
             energy = ff(coordinates, False)
@@ -163,13 +163,13 @@ class ToyFFTestCase(unittest.TestCase):
             self.assertAlmostEqual(energy, my_terms.sum())
 
     def test_bond_quad_gradient(self):
-        for i in xrange(10):
+        for i in range(10):
             ff, coordinates, dm, mask, unit_cell = self.get_random_ff()
             ff.bond_quad = 1.0
             self.check_toyff_gradient(ff, coordinates)
 
     def test_bond_hyper_energy(self):
-        for i in xrange(10):
+        for i in range(10):
             ff, coordinates, dm, mask, unit_cell = self.get_random_ff()
             ff.bond_hyper = 1.0
             energy = ff(coordinates, False)
@@ -178,7 +178,7 @@ class ToyFFTestCase(unittest.TestCase):
             self.assertAlmostEqual(energy/my_terms.sum(), 1.0)
 
     def test_bond_hyper_gradient(self):
-        for i in xrange(10):
+        for i in range(10):
             ff, coordinates, dm, mask, unit_cell = self.get_random_ff()
             ff.bond_hyper = 1.0
             self.check_toyff_gradient(ff, coordinates)

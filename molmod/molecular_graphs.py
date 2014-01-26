@@ -66,7 +66,7 @@ class MolecularGraph(Graph):
             raise TypeError("The number of symbols in the graph does not "
                 "match the length of the atomic numbers array.")
         for symbol in symbols:
-            if not isinstance(symbol, basestring):
+            if not isinstance(symbol, str):
                 raise TypeError("All symbols must be strings.")
 
     numbers = ReadOnlyAttribute(numpy.ndarray, none=False, check=_check_numbers,
@@ -126,7 +126,7 @@ class MolecularGraph(Graph):
         # are eliminated first
         slated_for_removal = set([])
         threshold = 0.5**0.5
-        for c, ns in result.neighbors.iteritems():
+        for c, ns in result.neighbors.items():
             lengths_ns = []
             for n in ns:
                 delta = molecule.coordinates[n] - molecule.coordinates[c]
@@ -152,14 +152,14 @@ class MolecularGraph(Graph):
                 raise ValueError('Could not find edge that has to be removed: %i %i' % (i0, i1))
             mask[edge_index] = False
         # actual removal
-        edges = [edges[i] for i in xrange(len(edges)) if mask[i]]
+        edges = [edges[i] for i in range(len(edges)) if mask[i]]
         if do_orders:
-            bond_order = [bond_order[i] for i in xrange(len(bond_order)) if mask[i]]
+            bond_order = [bond_order[i] for i in range(len(bond_order)) if mask[i]]
             result = cls(edges, molecule.numbers, orders)
         else:
             result = cls(edges, molecule.numbers)
 
-        lengths = [lengths[i] for i in xrange(len(lengths)) if mask[i]]
+        lengths = [lengths[i] for i in range(len(lengths)) if mask[i]]
         result.bond_lengths = numpy.array(lengths)
 
         return result
@@ -216,7 +216,7 @@ class MolecularGraph(Graph):
             raise TypeError("Can only multiply a graph with an integer")
         # copy edges
         new_edges = []
-        for i in xrange(repeat):
+        for i in range(repeat):
             for vertex1, vertex2 in self.edges:
                 new_edges.append(frozenset([vertex1+i*self.num_vertices, vertex2+i*self.num_vertices]))
         # copy numbers
@@ -298,7 +298,7 @@ class MolecularGraph(Graph):
 
         new_edges = list(self.edges)
         counter = self.num_vertices
-        for i in xrange(self.num_vertices):
+        for i in range(self.num_vertices):
             num_elec = self.numbers[i]
             if formal_charges is not None:
                 num_elec -= int(formal_charges[i])
@@ -317,7 +317,7 @@ class MolecularGraph(Graph):
                 if bo <= 0:
                     bo = 1
                 num_hydrogen -= int(bo)
-            for j in xrange(num_hydrogen):
+            for j in range(num_hydrogen):
                 new_edges.append((i, counter))
                 counter += 1
         new_numbers = numpy.zeros(counter, int)
@@ -432,7 +432,7 @@ class HasNeighbors(object):
             if len(l) == 1:
                 yield l
                 return
-            for i in xrange(len(l)):
+            for i in range(len(l)):
                 for sub in all_permutations(l[:i]+l[i+1:]):
                     yield [l[i]] + sub
 
@@ -562,7 +562,7 @@ class NRingPattern(CustomPattern):
             vertex_tags = {}
         self.size = size
         self.strong = strong
-        pattern_graph = Graph([(i, (i+1)%size) for i in xrange(size)])
+        pattern_graph = Graph([(i, (i+1)%size) for i in range(size)])
         CustomPattern.__init__(self, pattern_graph, criteria_sets, vertex_tags)
 
     def check_next_match(self, match, new_relations, subject_graph, one_match):
@@ -572,7 +572,7 @@ class NRingPattern(CustomPattern):
         if self.strong:
             # can this ever become a strong ring?
             vertex1_start = match.forward[self.pattern_graph.central_vertex]
-            for vertex1 in new_relations.itervalues():
+            for vertex1 in new_relations.values():
                 paths = list(subject_graph.iter_shortest_paths(vertex1, vertex1_start))
                 if self.size % 2 == 0 and len(match) == self.size:
                     if len(paths) != 2:
@@ -600,7 +600,7 @@ class NRingPattern(CustomPattern):
             # If the ring is not strong, return False
             if self.size % 2 == 0:
                 # even ring
-                for i in xrange(self.size/2):
+                for i in range(self.size/2):
                     vertex1_start = match.forward[i]
                     vertex1_stop = match.forward[i+self.size/2]
                     paths = list(subject_graph.iter_shortest_paths(vertex1_start, vertex1_stop))
@@ -613,7 +613,7 @@ class NRingPattern(CustomPattern):
                             return False
             else:
                 # odd ring
-                for i in xrange(self.size/2+1):
+                for i in range(self.size/2+1):
                     vertex1_start = match.forward[i]
                     vertex1_stop = match.forward[i+self.size/2]
                     paths = list(subject_graph.iter_shortest_paths(vertex1_start, vertex1_stop))

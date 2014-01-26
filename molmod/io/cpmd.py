@@ -64,8 +64,8 @@ class CPMDTrajectoryReader(SlicedReader):
         """Read and return the next time frame"""
         pos = numpy.zeros((self.num_atoms, 3), float)
         vel = numpy.zeros((self.num_atoms, 3), float)
-        for i in xrange(self.num_atoms):
-            line = self._f.next()
+        for i in range(self.num_atoms):
+            line = next(self._f)
             words = line.split()
             pos[i, 0] = float(words[1])
             pos[i, 1] = float(words[2])
@@ -77,5 +77,5 @@ class CPMDTrajectoryReader(SlicedReader):
 
     def _skip_frame(self):
         """Skip the next time frame"""
-        for i in xrange(self.num_atoms):
-            line = self._f.next()
+        for i in range(self.num_atoms):
+            line = next(self._f)

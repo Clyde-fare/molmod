@@ -30,4 +30,4 @@ energy_prod = -157.31397873
 
 reaction_energy = energy_prod - energy_react
 
-print "Reaction energy [kJ mol^-1]:", (reaction_energy/kjmol)
+print("Reaction energy [kJ mol^-1]:", (reaction_energy/kjmol))

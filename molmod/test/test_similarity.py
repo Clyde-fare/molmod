@@ -55,7 +55,7 @@ class SimilarityTestCase(unittest.TestCase):
 
     def check(self, molecules, margin, cutoff, verbose=False):
         if verbose:
-            print
+            print()
         for molecule in molecules:
             molecule.norm = compute_similarity(
                 molecule.descriptor,
@@ -64,13 +64,13 @@ class SimilarityTestCase(unittest.TestCase):
                 cutoff
              )**0.5
             if verbose:
-                print molecule.title, "norm:", molecule.norm
+                print(molecule.title, "norm:", molecule.norm)
         if verbose:
-            print
-            print " "*14, "".join("%15s" % molecule.title for molecule in molecules)
+            print()
+            print(" "*14, "".join("%15s" % molecule.title for molecule in molecules))
         result = []
         for index1, molecule1 in enumerate(molecules):
-            if verbose: print "%15s" % molecule1.title,
+            if verbose: print("%15s" % molecule1.title, end=' ')
             row = []
             result.append(row)
             for index2, molecule2 in enumerate(molecules):
@@ -80,8 +80,8 @@ class SimilarityTestCase(unittest.TestCase):
                     margin, cutoff
                 )/(molecule1.norm*molecule2.norm)
                 row.append(similarity)
-                if verbose: print ("%14.5f" % similarity),
-            if verbose: print
+                if verbose: print(("%14.5f" % similarity), end=' ')
+            if verbose: print()
         result = numpy.array(result)
         self.assert_((abs(numpy.diag(result) - 1) < 1e-5).all(), "Diagonal must be unity.")
         self.assert_((abs(result - result.transpose()) < 1e-5).all(), "Result must be symmetric.")

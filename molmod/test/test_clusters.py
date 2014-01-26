@@ -33,7 +33,7 @@ __all__ = ["ClusterTestCase"]
 class ClusterTestCase(unittest.TestCase):
     def test_even_odd(self):
         cf = ClusterFactory()
-        for counter in xrange(10000):
+        for counter in range(10000):
             a = numpy.random.randint(0, 200)
             b = numpy.random.randint(0, 200)
             if (a+b)%2 == 0:

@@ -80,7 +80,7 @@ class GroReader(SlicedReader):
         # Read the atom lines
         pos = numpy.zeros((num_atoms, 3), numpy.float32)
         vel = numpy.zeros((num_atoms, 3), numpy.float32)
-        for i in xrange(num_atoms):
+        for i in range(num_atoms):
             words = self._get_line()[22:].split()
             pos[i, 0] = float(words[0])
             pos[i, 1] = float(words[1])
@@ -113,5 +113,5 @@ class GroReader(SlicedReader):
         num_atoms = int(self._get_line())
         if self.num_atoms is not None and self.num_atoms != num_atoms:
             raise ValueError("The number of atoms must be the same over the entire file.")
-        for i in xrange(num_atoms+1):
+        for i in range(num_atoms+1):
             self._get_line()

@@ -668,7 +668,7 @@ class DiagonalPreconditioner(Preconditioner):
             N = len(x_orig)
             if self.scales is None:
                 self.scales = np.ones(N, float)
-            for i in xrange(N):
+            for i in range(N):
                 epsilon = self.epsilon/self.scales[i]
                 xh = x_orig.copy()
                 xh[i] += 0.5*epsilon
@@ -1003,7 +1003,7 @@ class FunWrapper(object):
                 return self.fun(x, do_gradient=True)
             else:
                 g = np.zeros(x.shape)
-                for j in xrange(len(x)):
+                for j in range(len(x)):
                     xh = x.copy()
                     xh[j] += 0.5*self.epsilon
                     xl = x.copy()
@@ -1077,8 +1077,8 @@ class Constraints(object):
         signs = []
         error = 0.0
         if verbose:
-            print
-            print ' '.join('% 10.3e' % val for val in x),
+            print()
+            print(' '.join('% 10.3e' % val for val in x), end=' ')
             active_str = ''
         for i, (sign, equation) in enumerate(self.equations):
             value, normal = equation(x)
@@ -1100,11 +1100,11 @@ class Constraints(object):
         values = np.array(values, float)
         signs = np.array(signs, int)
         if verbose:
-            print '[%s]' % active_str,
+            print('[%s]' % active_str, end=' ')
             if error < self.threshold:
-                print 'OK'
+                print('OK')
             else:
-                print '%.5e' % error
+                print('%.5e' % error)
         return normals, values, error, signs
 
     def _rough_shake(self, x, normals, values, error):
@@ -1121,7 +1121,7 @@ class Constraints(object):
         counter = 0
         while error > self.threshold and counter < self.max_iter:
             dxs = []
-            for i in xrange(len(normals)):
+            for i in range(len(normals)):
                 dx = -normals[i]*values[i]/np.dot(normals[i], normals[i])
                 dxs.append(dx)
             dxs = np.array(dxs)
@@ -1512,9 +1512,9 @@ class Minimizer(object):
         """Print something on screen when self.verbose == True"""
         if self.verbose:
             if newline:
-                print s
+                print(s)
             else:
-                print s,
+                print(s, end=' ')
 
     def _line_opt(self):
         """Perform a line search along the current direction"""
@@ -1589,7 +1589,7 @@ def check_anagrad(fun, x0, epsilon, threshold):
     """
     N = len(x0)
     f0, ana_grad = fun(x0, do_gradient=True)
-    for i in xrange(N):
+    for i in range(N):
         xh = x0.copy()
         xh[i] += 0.5*epsilon
         xl = x0.copy()
@@ -1697,7 +1697,7 @@ def compute_fd_hessian(fun, x0, epsilon, anagrad=True):
             return fun(x, do_gradient=True)[1]
         else:
             gradient = np.zeros(N, float)
-            for i in xrange(N):
+            for i in range(N):
                 xh = x.copy()
                 xh[i] += 0.5*epsilon
                 xl = x.copy()
@@ -1706,7 +1706,7 @@ def compute_fd_hessian(fun, x0, epsilon, anagrad=True):
             return gradient
 
     hessian = np.zeros((N,N), float)
-    for i in xrange(N):
+    for i in range(N):
         xh = x0.copy()
         xh[i] += 0.5*epsilon
         xl = x0.copy()

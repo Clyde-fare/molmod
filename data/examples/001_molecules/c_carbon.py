@@ -29,6 +29,6 @@ from molmod import *
 mol = Molecule.from_file("ibuprofen.sdf")
 
 # 1) Print out all carbon positions
-for i in xrange(mol.size):
+for i in range(mol.size):
     if mol.numbers[i] == 6:
-        print mol.coordinates[i]/angstrom
+        print(mol.coordinates[i]/angstrom)

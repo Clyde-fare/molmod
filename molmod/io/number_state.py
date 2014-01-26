@@ -67,7 +67,7 @@ class ScalarAttr(StateAttr):
         """Return the kind (type) of the attribute"""
         if isinstance(value, float):
             return 'f'
-        elif isinstance(value, int) or isinstance(value, long):
+        elif isinstance(value, int) or isinstance(value, int):
             return 'i'
         else:
             raise ValueError("Only integer or floating point values can be stored.")
@@ -81,7 +81,7 @@ class ScalarAttr(StateAttr):
         # print the header line
         value = self.get()
         kind = self.get_kind(value)
-        print >> f, "% 40s  kind=%s  value=%s" % (name, kind, value)
+        print("% 40s  kind=%s  value=%s" % (name, kind, value), file=f)
 
 
 class ArrayAttr(StateAttr):
@@ -119,20 +119,20 @@ class ArrayAttr(StateAttr):
         """Write the attribute to a file-like object"""
         array = self.get()
         # print the header line
-        print >> f, "% 40s  kind=%s  shape=%s" % (
+        print("% 40s  kind=%s  shape=%s" % (
             name,
             array.dtype.kind,
             ("%s" % (array.shape, )).replace(" ", ""),
-        )
+        ), file=f)
         # print the numbers
         counter = 0
         for value in array.flat:
             counter += 1
-            print >> f, "% 20s" % value,
+            print("% 20s" % value, end=' ', file=f)
             if counter % 4 == 0:
-                print >> f
+                print(file=f)
         if counter % 4 != 0:
-            print >> f
+            print(file=f)
 
     def load(self, f, skip):
         """Load the array data from a file-like object"""
@@ -214,9 +214,9 @@ class NumberState(object):
                               in the result
         """
         if subset is None:
-            return dict((name, attr.get(copy=True)) for name, attr in self._fields.iteritems())
+            return dict((name, attr.get(copy=True)) for name, attr in self._fields.items())
         else:
-            return dict((name, attr.get(copy=True)) for name, attr in self._fields.iteritems() if name in subset)
+            return dict((name, attr.get(copy=True)) for name, attr in self._fields.items() if name in subset)
 
     def set(self, new_fields, subset=None):
         """Assign the registered fields based on a dictionary
@@ -241,7 +241,7 @@ class NumberState(object):
         if subset is None:
             if len(new_fields) != len(self._fields):
                 raise ValueError("new_fields contains too many fields.")
-        for name, attr in self._fields.iteritems():
+        for name, attr in self._fields.items():
             if name in subset:
                 attr.set(new_fields[name])
 

@@ -73,7 +73,7 @@ class BinningTestCase(unittest.TestCase):
         for wrong_distance in wrong_distances:
             message += "%10s %10s: \t % 10.7f != % 10.7f\n" % wrong_distance
         message += "UNWANTED PAIRS: %i\n" % len(distances)
-        for identifier, fast_distance in distances.iteritems():
+        for identifier, fast_distance in distances.items():
             message += "%10s %10s: \t % 10.7f\n" % (identifier, fast_distance)
         message += "TOTAL PAIRS: %i\n" % num_total
         message += "CORRECT PAIRS: %i\n" % num_correct
@@ -152,7 +152,7 @@ class BinningTestCase(unittest.TestCase):
         self.verify_distances_intra(coordinates, cutoff, distances, unit_cell)
 
     def test_distances_intra_random(self):
-        for i in xrange(10):
+        for i in range(10):
             coordinates = numpy.random.uniform(0,5,(20,3))
             cutoff = numpy.random.uniform(1, 6)
             distances = [
@@ -163,7 +163,7 @@ class BinningTestCase(unittest.TestCase):
             self.verify_distances_intra(coordinates, cutoff, distances)
 
     def test_distances_intra_random_periodic(self):
-        for i in xrange(10):
+        for i in range(10):
             coordinates = numpy.random.uniform(0,1,(20,3))
             while True:
                 unit_cell = UnitCell(
@@ -186,7 +186,7 @@ class BinningTestCase(unittest.TestCase):
             self.verify_distances_intra(coordinates, cutoff, distances, unit_cell)
 
     def test_distances_inter_random(self):
-        for i in xrange(10):
+        for i in range(10):
             coordinates0 = numpy.random.uniform(0,5,(20,3))
             coordinates1 = numpy.random.uniform(0,5,(20,3))
             cutoff = numpy.random.uniform(1, 6)
@@ -198,7 +198,7 @@ class BinningTestCase(unittest.TestCase):
             self.verify_distances_inter(coordinates0, coordinates1, cutoff, distances)
 
     def test_distances_inter_random_periodic(self):
-        for i in xrange(10):
+        for i in range(10):
             fractional0 = numpy.random.uniform(0,1,(20,3))
             fractional1 = numpy.random.uniform(0,1,(20,3))
             while True:

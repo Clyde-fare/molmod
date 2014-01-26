@@ -33,12 +33,12 @@ mol.set_default_graph()
 # 1) Print out all the isomorphisms. For the ethanol molecule, this comes down
 # to all possible ways to rotate/mirror the methyl moieties, and combination
 # thereof.
-print "Isomorphisms in the form of one-to-one mappings"
+print("Isomorphisms in the form of one-to-one mappings")
 for symmetry in mol.graph.symmetries:
-    print symmetry
+    print(symmetry)
 
 # 2) One can also request isomorphisms in the form of permutations, which is
 # often more convenient:
-print "Isomorphisms in the form of permutations"
+print("Isomorphisms in the form of permutations")
 for cycle in mol.graph.symmetry_cycles:
-    print cycle
+    print(cycle)

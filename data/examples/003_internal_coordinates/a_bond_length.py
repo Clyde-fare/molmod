@@ -32,4 +32,4 @@ mol = Molecule.from_file("dopamine.xyz")
 d = bond_length(mol.coordinates[[1, 20]])[0]
 # The return value of bond_length is a singleton by default. The final
 # part `[0]` takes the first value of this singleton.
-print "Hydrogen bond length [Angstrom] =", d/angstrom
+print("Hydrogen bond length [Angstrom] =", d/angstrom)

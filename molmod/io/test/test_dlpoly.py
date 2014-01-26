@@ -36,7 +36,7 @@ class DLPolyTestCase(BaseTestCase):
     def test_history_reader(self):
         hr = DLPolyHistoryReader(context.get_fn("test/dlpoly_HISTORY"))
         assert hr.num_atoms == 3
-        frame = hr.next()
+        frame = next(hr)
         self.assertEqual(frame["step"], 4000)
         self.assertAlmostEqual(frame["timestep"]/picosecond, 0.001)
         self.assertAlmostEqual(frame["time"]/picosecond, 4.00)
@@ -47,22 +47,22 @@ class DLPolyTestCase(BaseTestCase):
         self.assertArraysAlmostEqual(frame["pos"][0]/angstrom, numpy.array([1.3522E+00, 1.3159E+00, 1.4312E+00]))
         self.assertArraysAlmostEqual(frame["vel"][0]/angstrom*picosecond, numpy.array([1.5113E+01, 1.0559E+00, 1.2843E-01]))
         self.assertArraysAlmostEqual(frame["frc"][0]/(amu*angstrom/picosecond**2), numpy.array([1.7612E+03, 3.6680E+03, 2.4235E+03]))
-        frame = hr.next()
+        frame = next(hr)
         self.assertEqual(frame["step"], 4050)
 
     def test_history_reader_restart(self):
         hr = DLPolyHistoryReader(context.get_fn("test/dlpoly_HISTORY_an2"))
         assert hr.num_atoms == 24
-        frame = hr.next()
+        frame = next(hr)
         self.assertEqual(frame["step"], 10381000)
         self.assertAlmostEqual(frame["timestep"]/picosecond, 0.001)
-        frame = hr.next()
+        frame = next(hr)
         self.assertEqual(frame["step"], 10382000)
 
     def test_output_reader(self):
         outr = DLPolyOutputReader(context.get_fn("test/dlpoly_OUTPUT"), skip_equi_period=False)
-        row = outr.next()
+        row = next(outr)
         self.assertAlmostEqual(row[0], 1)
         self.assertAlmostEqual(row[-1]/(1000*atm), 5.0151E+01)
-        row = outr.next()
+        row = next(outr)
         self.assertAlmostEqual(row[0], 50)

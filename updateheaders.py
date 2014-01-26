@@ -100,7 +100,7 @@ def main(fns):
             continue
         for ext, fixer in fixers:
             if fn.endswith(ext):
-                print 'Fixing  ', fn
+                print('Fixing  ', fn)
                 f = file(fn)
                 lines = f.readlines()
                 f.close()

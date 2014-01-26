@@ -34,7 +34,7 @@ __all__ = ["VectorTestCase"]
 
 class VectorTestCase(BaseTestCase):
     def test_cosine(self):
-        for i in xrange(100):
+        for i in range(100):
             a = numpy.random.normal(0,1,3)
             b = numpy.random.normal(0,1,3)
             cos = cosine(a,b)
@@ -50,7 +50,7 @@ class VectorTestCase(BaseTestCase):
             self.assertAlmostEqual(cos, 0)
 
     def test_angle(self):
-        for i in xrange(100):
+        for i in range(100):
             a = numpy.random.normal(0,1,3)
             b = numpy.random.normal(0,1,3)
             alpha = angle(a,b)
@@ -66,20 +66,20 @@ class VectorTestCase(BaseTestCase):
             self.assertAlmostEqual(alpha, numpy.pi/2)
 
     def test_random_unit(self):
-        for i in xrange(100):
+        for i in range(100):
             self.assertAlmostEqual(numpy.linalg.norm(random_unit(10)), 1.0)
             self.assertAlmostEqual(numpy.linalg.norm(random_unit()), 1.0)
             self.assertEqual(len(random_unit()), 3)
 
     def test_random_orthonormal(self):
-        for i in xrange(100):
+        for i in range(100):
             a = numpy.random.normal(0,1,3)
             b = random_orthonormal(a)
             self.assertAlmostEqual(numpy.dot(a,b), 0)
             self.assertAlmostEqual(numpy.linalg.norm(b), 1)
 
     def test_triangle_normal(self):
-        for i in xrange(100):
+        for i in range(100):
             a = numpy.random.normal(0,1,3)
             b = numpy.random.normal(0,1,3)
             c = numpy.random.normal(0,1,3)

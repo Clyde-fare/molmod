@@ -23,7 +23,7 @@
 """Tools for reading output from the Crystal 06 example API program."""
 
 
-from common import FileFormatError
+from .common import FileFormatError
 from molmod import UnitCell, Molecule
 
 import numpy as np
@@ -61,7 +61,7 @@ class CrystalAPIOut(object):
         f.readline()
         f.readline()
         vectors = []
-        for i in xrange(3):
+        for i in range(3):
             line = f.readline()
             vectors.append([float(word) for word in line.split()[1:]])
         vectors = np.array(vectors)
@@ -130,7 +130,7 @@ class CrystalAPIOut(object):
         # Compute the total number of basis functions (and orbitals).
         self.num_basis = 0
         subshell_counts = {'S': 1, 'P': 3, 'SP': 4, 'D': 5, 'F': 7, 'G': 9}
-        for symbol, basis in self.basisset.iteritems():
+        for symbol, basis in self.basisset.items():
             symbol_count = symbols.count(symbol)
             for subshell, contraction in basis:
                 self.num_basis += symbol_count*subshell_counts[subshell]
@@ -147,7 +147,7 @@ class CrystalAPIOut(object):
             f.readline()
             f.readline()
             f.readline()
-            for i in xrange(self.num_basis):
+            for i in range(self.num_basis):
                 line = f.readline()
                 words = line.split()[1:]
                 for j1, word in enumerate(words):

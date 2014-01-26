@@ -51,9 +51,9 @@ evals = eigvalsh(covar)
 # 5) The spread along the three eigenvectors is computed as the standard deviation
 # of the atomic coordinates along that direction:
 c, b, a = sqrt(evals)
-print "Spread along the long axis [A]:", a/angstrom
-print "Spread along the intermediate axis [A]:", b/angstrom
-print "Spread along the short axis [A]:", c/angstrom
+print("Spread along the long axis [A]:", a/angstrom)
+print("Spread along the intermediate axis [A]:", b/angstrom)
+print("Spread along the short axis [A]:", c/angstrom)
 
 # 6) Test in which category this shape belongs. The factor R is set to 1.5.
 R = 1.5
@@ -67,4 +67,4 @@ else:
         shape = 'oblate' # pancake-like
     else:
         shape = 'bladed' # keyboard-like
-print "The shape category:", shape
+print("The shape category:", shape)

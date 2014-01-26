@@ -34,7 +34,7 @@ __all__ = ["SDFTestCase"]
 class SDFTestCase(unittest.TestCase):
     def test_reader(self):
         sdf_reader = SDFReader(context.get_fn("test/example.sdf"))
-        mol = sdf_reader.next()
+        mol = next(sdf_reader)
         self.assertEqual(mol.title, "24978498")
         self.assertEqual(mol.size, 16)
         self.assertEqual(len(mol.graph.edges), 15)
@@ -42,7 +42,7 @@ class SDFTestCase(unittest.TestCase):
         self.assertAlmostEqual(mol.coordinates[0,0]/angstrom,  2.8660)
         self.assertAlmostEqual(mol.coordinates[4,1]/angstrom, -1.9400)
         self.assertAlmostEqual(mol.coordinates[15,1]/angstrom, -2.5600)
-        mol = sdf_reader.next()
+        mol = next(sdf_reader)
         self.assertEqual(mol.title, "24978481")
         self.assertEqual(mol.size, 21)
         self.assertEqual(len(mol.graph.edges), 19)
@@ -52,14 +52,14 @@ class SDFTestCase(unittest.TestCase):
         self.assertAlmostEqual(mol.coordinates[9,1]/angstrom, 2.5790)
         self.assertAlmostEqual(mol.coordinates[20,0]/angstrom, 1.7130)
         try:
-            sdf_reader.next()
+            next(sdf_reader)
             self.fail("Expecting a StopIteration.")
         except StopIteration:
             pass
 
     def test_reader2(self):
         sdf_reader = SDFReader(context.get_fn("test/CID_22898828.sdf"))
-        mol = sdf_reader.next()
+        mol = next(sdf_reader)
         self.assertEqual(mol.title, "22898828")
         self.assertEqual(mol.size, 14)
         self.assertEqual(len(mol.graph.edges), 13)

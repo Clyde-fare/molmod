@@ -79,9 +79,9 @@ class BondData(object):
         self._load_bond_data(filename)
         self._approximate_unkown_bond_lengths()
         self.max_length = max(
-            max(lengths.itervalues())
+            max(lengths.values())
             for lengths
-            in self.lengths.itervalues()
+            in self.lengths.values()
             if len(lengths) > 0
         )
 
@@ -107,7 +107,7 @@ class BondData(object):
             """Read the bondlengths from a single line in the data file"""
             nlow = int(words[2])
             nhigh = int(words[3])
-            for i, conversion in zip(xrange((len(words) - 4) / 3), conversions):
+            for i, conversion in zip(range((len(words) - 4) / 3), conversions):
                 word = words[col + 3 + i*3]
                 if word != 'NA':
                     self.lengths[BOND_TYPE][frozenset([nlow, nhigh])] = float(word)*conversion
